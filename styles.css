@@ -81,12 +81,21 @@ li {
     gap: 0.6rem;
     transition: all 0.3s ease;
     font-weight: 500;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+    touch-action: manipulation; /* Improve touch behavior */
 }
 
 .print-button button:hover {
     background-color: #2980b9;
     transform: translateY(-2px);
     box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+}
+
+/* Active state for better mobile feedback */
+.print-button button:active {
+    background-color: #2471a3;
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 /* Header Styles */
@@ -417,19 +426,52 @@ footer {
         right: 1.5rem;
         top: auto;
         z-index: 1000;
+        width: auto;
+        height: auto;
     }
 
     .print-button button {
         padding: 0.8rem 1.2rem;
-        font-size: 0.95rem;
+        font-size: 1rem;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         border-radius: 25px;
         background-color: #1a237e;
+        min-width: 130px;
+        min-height: 50px; /* Increased tap target size */
+        justify-content: center;
+        user-select: none; /* Prevent text selection */
+        outline: none; /* Remove outline */
+        -webkit-appearance: none; /* Fix for iOS */
+        -webkit-touch-callout: none; /* Disable callout on long-press */
     }
 
+    /* Disable hover effects on mobile - they can interfere with tapping */
     .print-button button:hover {
-        background-color: #283593;
-        transform: translateY(-2px);
+        background-color: #1a237e;
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Make the active state more pronounced */
+    .print-button button:active {
+        background-color: #3949ab; /* Lighter to show feedback */
+        transform: translateY(2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .mobile-print-help {
+        display: block;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+    }
+    
+    .mobile-print-help p {
+        margin: 0;
+        font-style: italic;
     }
 }
 
@@ -465,8 +507,25 @@ footer {
         padding: 1rem;
     }
 
+    .print-button {
+        bottom: 1.2rem;
+        right: 1.2rem;
+    }
+
     .print-button button {
         padding: 0.7rem 1rem;
         font-size: 0.9rem;
+        min-width: 110px;
+    }
+}
+
+/* Mobile print help message */
+.mobile-print-help {
+    display: none; /* Hidden by default */
+}
+
+@media print {
+    .mobile-print-help {
+        display: none; /* Don't print the help message */
     }
 } 

@@ -7,16 +7,57 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
+        // Enhanced print function with mobile fixes
         function printCV() {
-            window.print();
+            // Add a tiny delay to ensure the browser can process the click
+            setTimeout(function() {
+                try {
+                    window.print();
+                    console.log("Print dialog triggered");
+                } catch(e) {
+                    console.error("Print error:", e);
+                    alert("Printing failed. Please try again or use your browser's print function.");
+                }
+            }, 10);
+            
+            return false; // Prevent default action
         }
+        
+        // Attach events when page is loaded
+        window.onload = function() {
+            // Get all print buttons
+            var printButtons = document.querySelectorAll('.print-btn');
+            
+            // Add multiple event listeners for maximum compatibility
+            printButtons.forEach(function(button) {
+                // Modern browsers
+                button.addEventListener('click', printCV);
+                
+                // Touch devices
+                button.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    printCV();
+                });
+                
+                // For older mobile browsers
+                button.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                });
+            });
+        };
     </script>
 </head>
 <body>
     <div class="container">
         <div class="print-button">
-            <button onclick="printCV()"><i class="fas fa-print"></i> Print CV</button>
+            <button onclick="return printCV();" class="print-btn" aria-label="Print CV"><i class="fas fa-print"></i> Print CV</button>
         </div>
+        
+        <!-- Add a text instruction for mobile users -->
+        <div class="mobile-print-help">
+            <p>If the print button doesn't work, use your browser's menu to print this page.</p>
+        </div>
+        
         <header>
             <div class="profile">
                 <h1>Cassie Hendriks</h1>
