@@ -287,29 +287,92 @@ footer {
     }
 }
 
-/* Responsive Design - minimal changes for small screens only */
-@media (max-width: 600px) {
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
     .container {
-        padding: 1rem;
-        margin: 0.5rem;
+        margin: 1rem;
+        padding: 1.5rem;
     }
-    
+
+    .profile h1 {
+        font-size: 2rem;
+    }
+
     .contact-info {
         flex-direction: column;
         align-items: center;
+        gap: 0.5rem;
     }
-    
+
     .contact-info p {
-        margin: 0.25rem 0;
+        margin: 0.3rem 0;
     }
-    
-    .projects-grid, .skills-grid {
+
+    .separator {
+        display: none;
+    }
+
+    .projects-grid {
         grid-template-columns: 1fr;
     }
-    
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experience-item {
+        padding: 0.8rem;
+    }
+
+    .exp-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .certification-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
     .print-button {
-        position: static;
-        margin-bottom: 1rem;
-        text-align: right;
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        top: auto;
+        z-index: 1000;
+    }
+
+    .print-button button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+
+    .profile h1 {
+        font-size: 1.8rem;
+    }
+
+    .section h2 {
+        font-size: 1.4rem;
+        padding: 0.5rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .experience-item ul {
+        margin-left: 1rem;
+    }
+
+    .education-item ul {
+        margin-left: 1rem;
     }
 } 
